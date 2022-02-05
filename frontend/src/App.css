@@ -1,0 +1,39 @@
+html {
+  overflow-y: scroll;
+}
+
+.subject {
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.loading {
+  transition: all;
+  transition-duration: 0.2s;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.badge-host {
+  background-color: #ced4da !important;
+}
+
+.badge-sender {
+  background-color: #e9ecef !important;
+}
+
+.badge-severity-0 { background-color: #20c997 !important; }
+.badge-severity-1 { background-color: #ffc107 !important; }
+.badge-severity-2 { background-color: #fd7e14 !important; }
+.badge-severity-3 { background-color: #dc3545 !important; }
+
+.loaded .active > .badge {
+  transition: all;
+  transition-duration: 0.2s;
+  background-color: #212529 !important;
+  color: #f8f9fa !important;
+}

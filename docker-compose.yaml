@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  db:
+    container_name: logdb-db
+    user: 1000:1000
+    image: postgres
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - /etc/passwd:/etc/passwd:ro
+    networks:
+      - logdb
+
+  backend:
+    container_name: logdb-backend
+    user: 1000:1000
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/code
+      - ./static/django:/static
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DEBUG=true
+    ports:
+      - 8000:8000
+    networks:
+      - logdb
+    depends_on:
+      - db
+
+  frontend:
+    container_name: logdb-frontend
+    user: 1000:1000
+    build:
+      context: ./frontend
+    command: npm start
+    volumes:
+      - ./frontend/src:/app/src
+      - ./static/react:/app/build
+    ports:
+      - 3000:3000
+    networks:
+      - logdb
+    depends_on:
+      - backend
+
+networks:
+  logdb:
+    driver: bridge
