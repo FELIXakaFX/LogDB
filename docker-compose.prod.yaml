@@ -3,7 +3,6 @@ version: '3'
 services:
   db:
     container_name: logdb-db
-    user: 1000:1000
     image: postgres
     environment:
       - POSTGRES_NAME=postgres
@@ -11,7 +10,6 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - logdb-data:/var/lib/postgresql/data
-      - /etc/passwd:/etc/passwd:ro
     networks:
       - logdb
 
