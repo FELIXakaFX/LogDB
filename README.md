@@ -8,10 +8,6 @@ Starting containers
 
     docker-compose up
 
-Creating an admin account
-
-    docker exec -it logdb-backend python manage.py createsuperuser
-
 # Installing (prod)
 
 Building static files for production deployment
@@ -22,6 +18,14 @@ Building static files for production deployment
 Running production build
 
     docker-compose -f docker-compose.prod.yaml up
+
+Edit backend/LogDB/settings.py
+- Set DEBUG to False
+- Set CSRF_TRUSTED_ORIGINS to the hostname where the service will be accessible at
+
+Creating an admin account
+
+    docker exec -it logdb-backend python manage.py createsuperuser
 
 # Dropping privileges of postgres container
 

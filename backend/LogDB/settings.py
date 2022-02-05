@@ -14,6 +14,7 @@ import os
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,8 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-=-7(($19v43%@yf^9-^l-+&(5&5x1x&adn^py@fyx83fyncuav'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: disable in production!
 DEBUG = True
+
+# PRODUCTION: set this to the domain where the service will be accessible
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
 
 ALLOWED_HOSTS = ['localhost', 'logdb-backend']
 
@@ -148,3 +152,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 25
 }
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
