@@ -10,7 +10,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - logdb-data:/var/lib/postgresql/data
       - /etc/passwd:/etc/passwd:ro
     networks:
       - logdb
@@ -50,6 +50,9 @@ services:
       - logdb
     depends_on:
       - backend
+
+volumes:
+  logdb-data:
 
 networks:
   logdb:
