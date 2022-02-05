@@ -8,6 +8,10 @@ Starting containers
 
     docker-compose up
 
+Creating an admin account
+
+    docker exec -it logdb-backend python manage.py createsuperuser
+
 # Installing (prod)
 
 Building static files for production deployment
