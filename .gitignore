@@ -1,3 +1,2 @@
-/data/*
-/static/react/*
-/static/django/*
+/data
+/static
