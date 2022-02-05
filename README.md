@@ -1,9 +1,7 @@
 Creating data and static directories (if not Docker will create these with root permissions)
 
-    mkdir data
-    mkdir static
-    mkdir static/react
-    mkdir static/django
+    mkdir -p static/react
+    mkdir -p static/django
 
 Starting containers
 
