@@ -10,10 +10,13 @@ import time
 import json
 
 api_host = 'localhost:8000'
+fail_severity = 2
 while sys.argv[1].startswith("-"):
     arg = sys.argv.pop(1)
     if arg == "-h":
         api_host = sys.argv.pop(1)
+    if arg == "-s":
+        fail_severity = sys.argv.pop(1)
 
 api_url = 'http://'+api_host+'/api/logs/'
 log_interval = 5
@@ -26,7 +29,7 @@ sender   = "shell "+sys.argv[1].split("/")[-1][:25]
 subject  = "Results from "
 subject += (command_str[:250] + '...') if len(command_str) > 250 else command_str
 description = command_str
-severity = 0
+severity = None
 
 log_id = 0
 stdout, stderr = b'', b''
@@ -82,15 +85,15 @@ try:
                 send_data()
 
     process.communicate()
-
     if process.returncode:
-        severity = 2
+        severity = fail_severity
+        
 except Exception as e:
     print(e)
     stdout, stderr = b'', e
-    severity = 2
+    severity = fail_severity
 
 send_data()
 
 print("API_URL: "+str(api_url+str(log_id)))
-print("CODE: "+str(severity))
+print("SEVERITY: "+str(severity))

@@ -7,7 +7,6 @@ import EventBadge from './EventBadge';
 
 class EventListItem extends React.Component {
     render() {
-    let now      = new Date();
     let created  = new Date(this.props.item.created);
     let modified = new Date(this.props.item.modified);
     let delta = Math.round((modified - created) / 60000);
@@ -16,7 +15,7 @@ class EventListItem extends React.Component {
     if (delta < 1) h_delta = "instant";
     else if (delta < 60) h_delta = delta + " minutes";
     else h_delta = Math.floor(delta/60) + " hours";
-    if (Math.floor((now - modified) / 60000) < 1) h_delta = " ongoing";
+    if (! this.props.item.severity) h_delta = "ongoing";
 
     return (
     <Card>

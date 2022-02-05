@@ -27,6 +27,7 @@ class EventSerializer(DynamicEventSerializer):
         instance.description += validated_data.get('description') or ''
         instance.stdout      += validated_data.get('stdout'     ) or ''
         instance.stderr      += validated_data.get('stderr'     ) or ''
+        instance.severity     = validated_data.get('severity'   )
         instance.save()
         return instance
 

@@ -29,7 +29,7 @@ class Event(models.Model):
     stderr       = models.TextField(null=True)
     host         = models.ForeignKey(Host, on_delete=models.CASCADE)
     sender       = models.ForeignKey(Sender, on_delete=models.CASCADE)
-    severity     = models.PositiveSmallIntegerField()
+    severity     = models.PositiveSmallIntegerField(null=True)
     tags         = models.ManyToManyField(Tag, blank=True)
     def __str__(self):
         return self.subject
