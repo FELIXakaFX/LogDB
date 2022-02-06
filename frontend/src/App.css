@@ -30,6 +30,7 @@ html {
 .badge-severity-1 { background-color: #ffc107 !important; }
 .badge-severity-2 { background-color: #fd7e14 !important; }
 .badge-severity-3 { background-color: #dc3545 !important; }
+.badge-severity-null { background-color: #b0b5bb !important; }
 
 .loaded .active > .badge {
   transition: all;

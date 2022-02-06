@@ -32,7 +32,7 @@ class EventListItem extends React.Component {
         </Link>
         </Card.Title>
         <Stack direction="horizontal" gap={1}>
-        <div><Badge className={"badge-severity-"+this.props.item.severity} text="dark">{this.props.item.severity}</Badge></div>
+        <div><Badge className={"badge-severity-"+this.props.item.severity} text="dark">{this.props.item.severity ?? ".."}</Badge></div>
         <EventBadge type="host" badge={this.props.item.host} />
         <EventBadge type="sender" badge={this.props.item.sender} />
         </Stack>
