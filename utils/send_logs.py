@@ -87,6 +87,8 @@ try:
     process.communicate()
     if process.returncode:
         severity = fail_severity
+    else:
+        severity = 0
         
 except Exception as e:
     print(e)

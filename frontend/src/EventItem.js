@@ -15,7 +15,7 @@ class EventListItem extends React.Component {
     if (delta < 1) h_delta = "instant";
     else if (delta < 60) h_delta = delta + " minutes";
     else h_delta = Math.floor(delta/60) + " hours";
-    if (! this.props.item.severity) h_delta = "ongoing";
+    if (this.props.item.severity === null) h_delta = "ongoing";
 
     return (
     <Card>
