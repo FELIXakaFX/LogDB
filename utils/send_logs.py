@@ -75,14 +75,18 @@ try:
     Thread(target=reader, args=[process.stdout, q]).start()
     Thread(target=reader, args=[process.stderr, q]).start()
     for _ in range(2):
-        for source, line in iter(q.get, None):
-            print(line.decode("utf-8"), end="")
+        for source, char in iter(q.get, None):
+            print(char.decode("utf-8"), end="")
             if(source.name == 3):
-                stdout += line
+                stdout += char
             else:
-                stderr += line
+                stderr += char
 
             if time.time() - last_sent > log_interval:
+                if stdout != b"":
+                    stdout += b"\n"
+                if stderr != b"":
+                    stderr += b"\n"
                 send_data()
 
     process.communicate()
