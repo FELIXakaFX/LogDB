@@ -8,6 +8,7 @@ import sys
 import socket
 import time
 import json
+import re
 
 api_host = 'localhost:8000'
 fail_severity = 2
@@ -43,8 +44,8 @@ def send_data():
         'sender_str': sender,
         'subject': subject,
         'description': description,
-        'stdout': stdout,
-        'stderr': stderr,
+        'stdout': re.sub(b'.*\r', b'', stdout),
+        'stderr': re.sub(b'.*\r', b'', stderr),
         'severity': severity,
         'tags_str': "shell"
         }
