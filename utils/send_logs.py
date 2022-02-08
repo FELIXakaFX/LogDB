@@ -39,6 +39,11 @@ last_sent = time.time()
 
 def send_data():
     global description, stderr, stdout, log_id, last_sent
+    if stdout != b"":
+        stdout += b"\n"
+    if stderr != b"":
+        stderr += b"\n"
+
     data = {
         'host_str': host,
         'sender_str': sender,
@@ -83,10 +88,6 @@ try:
                 stderr += char
 
             if time.time() - last_sent > log_interval:
-                if stdout != b"":
-                    stdout += b"\n"
-                if stderr != b"":
-                    stderr += b"\n"
                 send_data()
 
     process.communicate()
