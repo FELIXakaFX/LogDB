@@ -90,7 +90,7 @@ try:
             if time.time() - last_sent > log_interval:
                 send_data()
 
-    process.communicate()
+    process.poll()
     if process.returncode:
         severity = fail_severity
     else:
