@@ -15,9 +15,12 @@ class DynamicEventSerializer(serializers.ModelSerializer):
                 self.fields.pop(field_name)
 
 class EventSerializer(DynamicEventSerializer):
-    host_str = serializers.CharField(max_length=50, write_only=True)
-    sender_str = serializers.CharField(max_length=50, write_only=True)
-    tags_str = serializers.CharField(max_length=100, write_only=True)
+    host_str     = serializers.CharField(max_length=50,  write_only=True)
+    sender_str   = serializers.CharField(max_length=50,  write_only=True)
+    tags_str     = serializers.CharField(max_length=100, write_only=True)
+    description  = serializers.CharField(allow_blank=True, trim_whitespace=False)
+    stdout       = serializers.CharField(allow_blank=True, trim_whitespace=False)
+    stderr       = serializers.CharField(allow_blank=True, trim_whitespace=False)
 
     def create(self, validated_data):
         return Event.create(validated_data)
