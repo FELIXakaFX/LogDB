@@ -39,10 +39,6 @@ last_sent = time.time()
 
 def send_data():
     global description, stderr, stdout, log_id, last_sent
-    if stdout != b"":
-        stdout += b"\n"
-    if stderr != b"":
-        stderr += b"\n"
 
     data = {
         'host_str': host,
