@@ -26,7 +26,7 @@ shell_command = sys.argv[1:]
 command_str = " ".join(shell_command)
 
 host     = socket.gethostname()[:25]
-sender   = "shell "+sys.argv[1].split("/")[-1][:25]
+sender   = sys.argv[1].split("/")[-1][:25]
 subject  = "Results from "
 subject += (command_str[:250] + '...') if len(command_str) > 250 else command_str
 description = command_str
@@ -98,7 +98,7 @@ try:
         
 except Exception as e:
     print(e)
-    stdout, stderr = b'', e
+    stdout, stderr = b'', str.encode(repr(e))
     severity = fail_severity
 
 send_data()
