@@ -26,13 +26,7 @@ class EventSerializer(DynamicEventSerializer):
         return Event.create(validated_data)
 
     def update(self, instance, validated_data):
-        print(validated_data)
-        instance.description += validated_data.get('description') or ''
-        instance.stdout      += validated_data.get('stdout'     ) or ''
-        instance.stderr      += validated_data.get('stderr'     ) or ''
-        instance.severity     = validated_data.get('severity'   )
-        instance.save()
-        return instance
+        return Event.update(instance, validated_data)
 
     class Meta:
         model = Event 
