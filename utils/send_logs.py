@@ -51,16 +51,19 @@ def send_data():
         'tags_str': "shell"
         }
 
-    if not log_id:
-        x = requests.post(api_url, data = data)
-        log_id = json.loads(x.text)["id"]
+    try:
+        if not log_id:
+            x = requests.post(api_url, data = data)
+            log_id = json.loads(x.text)["id"]
+        else:
+            x = requests.patch(api_url+str(log_id)+"/", data = data)
+
+    except Exception as e:
+        print(e)
+
     else:
-        x = requests.patch(api_url+str(log_id)+"/", data = data)
-
-
-    last_sent = time.time()
-
-    description, stdout, stderr = "", b"", b""
+        last_sent = time.time()
+        description, stdout, stderr = "", b"", b""
 
 try:
     def reader(pipe, queue):
