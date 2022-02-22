@@ -40,6 +40,11 @@ last_sent = time.time()
 def send_data():
     global description, stderr, stdout, log_id, last_sent
 
+    if not stderr == b'' and not stderr.endswith(b'\n'):
+        stderr += b'\n'
+    if not stdout == b'' and not stdout.endswith(b'\n'):
+        stdout += b'\n'
+
     data = {
         'host_str': host,
         'sender_str': sender,
@@ -90,7 +95,7 @@ try:
                 send_data()
 
     process.poll()
-    if process.returncode:
+    if process.returncode != 0:
         severity = fail_severity
     else:
         severity = 0
