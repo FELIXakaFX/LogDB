@@ -1,8 +1,6 @@
 Django
 psycopg2
-django-debug-toolbar
 djangorestframework
 django-cors-headers
 django-filter
-djangorestframework
 gunicorn
