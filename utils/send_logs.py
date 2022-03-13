@@ -40,18 +40,21 @@ last_sent = time.time()
 def send_data():
     global description, stderr, stdout, log_id, last_sent
 
-    if not stderr == b'' and not stderr.endswith(b'\n'):
-        stderr += b'\n'
-    if not stdout == b'' and not stdout.endswith(b'\n'):
-        stdout += b'\n'
+    p_stderr = re.sub(b'.*\r', b'', stderr)
+    p_stdout = re.sub(b'.*\r', b'', stdout)
+
+    if not p_stderr == b'' and not p_stderr.endswith(b'\n'):
+        p_stderr += b'\n'
+    if not p_stdout == b'' and not p_stdout.endswith(b'\n'):
+        p_stdout += b'\n'
 
     data = {
         'host_str': host,
         'sender_str': sender,
         'subject': subject,
         'description': description,
-        'stdout': re.sub(b'.*\r', b'', stdout),
-        'stderr': re.sub(b'.*\r', b'', stderr),
+        'stdout': p_stdout,
+        'stderr': p_stderr,
         'severity': severity,
         'tags_str': "shell"
         }
